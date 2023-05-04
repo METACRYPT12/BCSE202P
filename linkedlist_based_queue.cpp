@@ -34,6 +34,7 @@ class Queue
 private:
     Node *front = NULL;
     Node *rear = NULL;
+    // counter = -1;
 
 public:
     void enqueue(int d)
@@ -48,6 +49,7 @@ public:
         */
 
         Node *ptr = new Node(d);
+        // ++counter;
 
         if (front == NULL)
         {
@@ -71,6 +73,7 @@ public:
         }
 
         cout << "Dequeued: " << front->data << endl;
+        //--counter;
 
         if (front == rear)
         {
@@ -113,7 +116,7 @@ public:
         /// @brief Use only if virtual limit is set!!!
         bool isFull()
         {
-            if ((rear - front) == MAX - 1)
+            if (counter == MAX - 1)
                 return true;
             return false;
         }
