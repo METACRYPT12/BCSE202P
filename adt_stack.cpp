@@ -2,6 +2,7 @@
 #include <Windows.h>
 #else
 #include <unistd.h>
+#define Sleep(timeMs) usleep((timeMs)*1000)
 #endif
 #include <iostream>
 
