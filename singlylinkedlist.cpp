@@ -147,7 +147,7 @@ void LinkedList::search(int data)
 {
     Node *iter = head;
     int i = 1;
-    while (iter->next != NULL)
+    while (iter != NULL)
     {
         if (iter->data == data)
         {
