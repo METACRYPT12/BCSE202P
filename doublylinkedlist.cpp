@@ -115,7 +115,8 @@ void LinkedList::deletep(int position)
     if (position == 1)
     {
         head = ptr->next;
-        ptr->next->prev = NULL;
+        if (ptr->prev != NULL)
+            ptr->next->prev = NULL;
         free(ptr);
         return;
     }
@@ -127,8 +128,13 @@ void LinkedList::deletep(int position)
             ptr = iter;
             iter = iter->next;
         }
-        ptr->next->prev = NULL;
-        ptr->next = NULL;
+        if (ptr->next != NULL)
+        {
+            ptr->next->prev = NULL;
+            ptr->next = NULL;
+        }
+        else
+            head = NULL;
         free(iter);
         return;
     }
@@ -162,7 +168,15 @@ void LinkedList::search(int data)
 {
     Node *iter = head;
     int i = 1;
-    while (iter->next != NULL)
+
+    if (iter == NULL)
+    {
+        cout << "List Empty!!!" << endl;
+        cout << endl;
+        return;
+    }
+
+    while (iter != NULL)
     {
         if (iter->data == data)
         {
