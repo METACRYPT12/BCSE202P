@@ -115,7 +115,7 @@ void LinkedList::deletep(int position)
     if (position == 1)
     {
         head = ptr->next;
-        if (ptr->prev != NULL)
+        if (ptr->next != NULL)
             ptr->next->prev = NULL;
         free(ptr);
         return;

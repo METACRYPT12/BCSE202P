@@ -58,6 +58,13 @@ void LinkedList::insert(int data, int position)
     {
         temp->next = head;
 
+        if (ptr == NULL)
+        {
+            head = temp;
+            head->next = head;
+            return;
+        }
+
         while (ptr->next != head)
         {
             ptr = ptr->next;
@@ -89,18 +96,19 @@ void LinkedList::insert(int data, int position)
         return;
     }
 
-    int i = 2;
-    ptr = ptr->next;
+    int i = 1;
     Node *prevPtr = head;
+    Node *dummyHead = NULL;
 
-    while (i <= position - 1 || ptr == head)
+    while (i <= position - 1 && ptr != dummyHead)
     {
+        dummyHead = head;
         i++;
-        prevPtr = prevPtr->next;
+        prevPtr = ptr;
         ptr = ptr->next;
     }
 
-    if (i != position || position < 0)
+    if (i != position || position < 0 || ptr == NULL)
     {
         cout << "Positiion Out of Bounds!!!" << endl;
         cout << endl;
@@ -116,9 +124,19 @@ void LinkedList::deletep(int position)
 {
     Node *ptr = head;
     Node *temp = head;
+    Node *iter = ptr;
+    int i = 1;
+
+    if (ptr == NULL)
+        goto empty;
 
     if (position == 1)
     {
+        if (head == head->next)
+        {
+            head = NULL;
+            return;
+        }
         head = ptr->next;
         while (ptr->next != temp)
         {
@@ -129,10 +147,13 @@ void LinkedList::deletep(int position)
         return;
     }
 
-    Node *iter = ptr;
-
     if (position == 0)
     {
+        if (head == head->next)
+        {
+            head = NULL;
+            return;
+        }
         while (ptr->next->next != head)
         {
             ptr = ptr->next;
@@ -142,7 +163,6 @@ void LinkedList::deletep(int position)
         return;
     }
 
-    int i = 1;
     while (iter->next != head && i <= position - 1)
     {
         i++;
@@ -156,6 +176,11 @@ void LinkedList::deletep(int position)
     }
 
     cout << "Positiion Out of Bounds!!!" << endl;
+    cout << endl;
+    return;
+
+empty:
+    cout << "List Empty!!!" << endl;
     cout << endl;
     return;
 }

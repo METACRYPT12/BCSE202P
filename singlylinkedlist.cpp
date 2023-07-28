@@ -78,18 +78,17 @@ void LinkedList::insert(int data, int position)
         return;
     }
 
-    int i = 2;
-    ptr = ptr->next;
+    int i = 1;
     Node *prevPtr = head;
 
-    while (i <= position - 1 || ptr == NULL)
+    while (i <= position - 1 && ptr != NULL)
     {
         i++;
-        prevPtr = prevPtr->next;
+        prevPtr = ptr;
         ptr = ptr->next;
     }
 
-    if (i != position || position < 0)
+    if (i != position || position < 0 || ptr == NULL)
     {
         cout << "Positiion Out of Bounds!!!" << endl;
         cout << endl;
